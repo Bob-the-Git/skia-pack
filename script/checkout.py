@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import argparse, common, os, pathlib, platform, re, subprocess, sys
+import shutil
 
 def main():
   os.chdir(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -55,6 +56,9 @@ def main():
     subprocess.check_call(["python", "tools/git-sync-deps"], env=env)
   else:
     subprocess.check_call(["python", "tools/git-sync-deps"])
+
+  shutil.make_archive("depot_tools", "zip", "depot_tools")
+  shutil.make_archive("skia", "zip", "skia")
 
   return 0
 

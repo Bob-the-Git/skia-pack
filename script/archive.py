@@ -84,6 +84,8 @@ def main():
               zip.write(str(dir))
               dirs.add(dir)
           zip.write(str(path))
+    zip.write(os.path.join(os.pardir, "depot_tools.zip"))
+    zip.write(os.path.join(os.pardir, "skia.zip"))
 
   return 0
 
