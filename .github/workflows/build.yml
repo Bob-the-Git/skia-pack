@@ -31,7 +31,7 @@ jobs:
         if: ${{ github.event.inputs.skip_release != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: python3 script/checkout.py --version ${{ env.version }}
+      - run: python3 script/checkout.py --version ${{ env.version }} --build-type  ${{ matrix.build_type }} --target ${{ matrix.target }} --machine ${{ matrix.machine }}
       - run: python3 script/build.py --build-type ${{ matrix.build_type }} --target ${{ matrix.target }} --machine ${{ matrix.machine }}
       - run: python3 script/archive.py --version ${{ env.version }} --build-type  ${{ matrix.build_type }} --target ${{ matrix.target }} --machine ${{ matrix.machine }}
       - uses: actions/upload-artifact@v2

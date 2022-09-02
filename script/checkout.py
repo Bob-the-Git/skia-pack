@@ -58,9 +58,9 @@ def main():
   else:
     subprocess.check_call(["python", "tools/git-sync-deps"])
 
-  print("> Compressing source code")
-  os.chdir(rootPath)
   base = 'Skia-' + common.version() + '-' + common.target() + '-' + common.build_type() + '-' + common.machine() + common.classifier()
+  print("> Compressing source code: " + base)
+  os.chdir(rootPath)
   shutil.make_archive(base + "-depot_tools", "zip", "depot_tools")
   shutil.make_archive(base + "-skia", "zip", "skia")
 
