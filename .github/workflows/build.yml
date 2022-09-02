@@ -56,7 +56,7 @@ jobs:
         if: ${{ github.event.inputs.skip_release != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/checkout.py --version ${{ env.version }}
+      - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/checkout.py --version ${{ env.version }} --build-type ${{ matrix.build_type }} --classifier ubuntu18
       - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/build.py --build-type ${{ matrix.build_type }}
       - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/archive.py --version ${{ env.version }} --build-type ${{ matrix.build_type }} --classifier ubuntu18
       - uses: actions/upload-artifact@v2
@@ -83,7 +83,7 @@ jobs:
         if: ${{ github.event.inputs.skip_release != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: python3 script/checkout.py --version ${{ env.version }}
+      - run: python3 script/checkout.py --version ${{ env.version }} --classifier ubuntu14  --build-type ${{ matrix.build_type }}
       - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/build.py  --build-type ${{ matrix.build_type }}
       - run: python3 script/archive.py --version ${{ env.version }} --classifier ubuntu14  --build-type ${{ matrix.build_type }}
       - uses: actions/upload-artifact@v2
@@ -109,7 +109,7 @@ jobs:
         if: ${{ github.event.inputs.skip_release != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: python3 script/checkout.py --version ${{ env.version }}
+      - run: python3 script/checkout.py --version ${{ env.version }} --target wasm --machine wasm --build-type ${{ matrix.build_type }}
       - run: python3 script/build.py --target wasm --machine wasm --build-type ${{ matrix.build_type }}
       - run: python3 script/archive.py --version ${{ env.version }} --target wasm --machine wasm --build-type ${{ matrix.build_type }}
       - uses: actions/upload-artifact@v2
@@ -135,7 +135,7 @@ jobs:
         if: ${{ github.event.inputs.skip_release != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: python3 script/checkout.py --version ${{ env.version }}
+      - run: python3 script/checkout.py --version ${{ env.version }} --target android --build-type ${{ matrix.build_type }} --machine ${{ matrix.machine }}
       - uses: nttld/setup-ndk@v1
         id: setup-ndk
         with:
@@ -184,7 +184,7 @@ jobs:
               cd /checkout
               /bin/bash script/prepare_linux_arm.sh
               python3 script/check_release.py --version ${build_version} --build-type ${build_type}
-              python3 script/checkout.py --version ${build_version}
+              python3 script/checkout.py --version ${build_version} --build-type ${build_type}
               python3 script/build.py --build-type ${build_type} --build-type ${build_type}
               python3 script/archive.py --version ${build_version} --build-type ${build_type}
               echo "Produced artifact at ${PWD}/${artifact_name}"
@@ -216,7 +216,7 @@ jobs:
       - uses: microsoft/setup-msbuild@v1
       - uses: ilammy/msvc-dev-cmd@v1
       - shell: bash
-        run: python3 script/checkout.py --version ${{ env.version }}
+        run: python3 script/checkout.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
       - shell: bash
         run: python3 script/build.py --build-type ${{ matrix.build_type }}
       - shell: bash
