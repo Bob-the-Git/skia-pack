@@ -19,11 +19,12 @@ def main():
 
   CHUNK_SIZE = 1024 * 1024 * 1024
   file_number = 1
-  with open(zip) as f:
+  with open(zip, 'rb') as f:
       chunk = f.read(CHUNK_SIZE)
       while chunk:
-          with open(zip + "." + str(file_number)) as chunk_file:
+          with open(zip + "." + str(file_number), 'wb') as chunk_file:
               chunk_file.write(chunk)
+          print('volume: ' + zip + "." + str(file_number))
           upload(zip + "." + str(file_number))
           file_number += 1
           chunk = f.read(CHUNK_SIZE)
