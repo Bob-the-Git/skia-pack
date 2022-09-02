@@ -5,6 +5,7 @@ import shutil
 
 def main():
   os.chdir(os.path.join(os.path.dirname(__file__), os.pardir))
+  rootPath = os.path.join(os.path.dirname(__file__), os.pardir)
 
   parser = common.create_parser(True)
   args = parser.parse_args()
@@ -57,7 +58,7 @@ def main():
   else:
     subprocess.check_call(["python", "tools/git-sync-deps"])
 
-  os.chdir(os.path.join(os.path.abspath(__file__), os.pardir))
+  os.chdir(rootPath)
   shutil.make_archive("depot_tools", "zip", "depot_tools")
   shutil.make_archive("skia", "zip", "skia")
 
