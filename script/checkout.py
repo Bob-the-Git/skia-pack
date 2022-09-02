@@ -57,7 +57,7 @@ def main():
   else:
     subprocess.check_call(["python", "tools/git-sync-deps"])
 
-  os.chdir(os.path.join(os.path.dirname(__file__), os.pardir))
+  os.chdir(os.path.join(os.path.abspath(__file__), os.pardir))
   shutil.make_archive("depot_tools", "zip", "depot_tools")
   shutil.make_archive("skia", "zip", "skia")
 
