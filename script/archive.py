@@ -73,6 +73,8 @@ def main():
 
   dist = 'Skia-' + version + '-' + target + '-' + build_type + '-' + machine + classifier + '.zip'
   print('> Writing', dist)
+
+  base = 'Skia-' + common.version() + '-' + common.target() + '-' + common.build_type() + '-' + common.machine() + common.classifier()
   
   with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
     dirs = set()
@@ -84,8 +86,8 @@ def main():
               zip.write(str(dir))
               dirs.add(dir)
           zip.write(str(path))
-    zip.write(os.path.join(os.pardir, "depot_tools.zip"))
-    zip.write(os.path.join(os.pardir, "skia.zip"))
+    zip.write(os.path.join(os.pardir, base + "-depot_tools.zip"))
+    zip.write(os.path.join(os.pardir, base + "-skia.zip"))
 
   return 0
 
