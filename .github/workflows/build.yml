@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - w3b2
+      - Bob-the-Git
     paths:
       - ".github/workflows/*"
       - "script/*"
@@ -14,7 +14,7 @@ on:
         default: 'false'
 
 env:
-  version: m105-f204b137b9-w3b2-1
+  version: m105-f204b137b9-Bob-the-Git-1
 
 jobs:
   macos:
