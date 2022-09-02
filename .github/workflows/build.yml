@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - w3b2
     paths:
       - ".github/workflows/*"
       - "script/*"
@@ -14,7 +14,7 @@ on:
         default: 'false'
 
 env:
-  version: m105-f204b137b9-5
+  version: m105-f204b137b9-w3b2-1
 
 jobs:
   macos:
