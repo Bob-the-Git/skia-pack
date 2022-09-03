@@ -14,7 +14,7 @@ on:
         default: 'false'
 
 env:
-  version: m105-f204b137b9-Bob-the-Git-2
+  version: m105-f204b137b9-Bob-the-Git-3
 
 jobs:
   macos:
@@ -217,8 +217,11 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - shell: bash
         run: python3 script/checkout.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
-      - shell: bash
-        run: python3 script/build.py --build-type ${{ matrix.build_type }}
+      # Error with GitHub: 
+      #   skia.lib : fatal error LNK1180: insufficient disk space to complete link
+      # Windows: Skip the build step by default;
+      # - shell: bash
+      #   run: python3 script/build.py --build-type ${{ matrix.build_type }}
       - shell: bash
         run: python3 script/archive.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
       - uses: actions/upload-artifact@v2
