@@ -206,6 +206,9 @@ jobs:
         build_type: [Debug, Release]
       fail-fast: false
     steps:
+      - run: mkdir C:/skia-pack
+      - name: set working directory
+        working-directory: C:/skia-pack
       - run: git config --global core.autocrlf input
       - uses: actions/checkout@v2
       - shell: bash
