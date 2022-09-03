@@ -208,7 +208,8 @@ jobs:
       matrix:
         build_type: [Debug, Release]
       fail-fast: false
-    steps:
+    steps:      
+      - run: cd /d C:\vcpkg
       - run: git config --global core.autocrlf input
       - uses: actions/checkout@v2
       - shell: bash
