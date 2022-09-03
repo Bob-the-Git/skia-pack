@@ -4,8 +4,8 @@ import argparse, common, os, pathlib, platform, re, subprocess, sys
 import shutil
 
 def main():
-  os.chdir(os.path.join(os.path.dirname(__file__), os.pardir))
   rootPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)
+  os.chdir(rootPath)
 
   parser = common.create_parser(True)
   args = parser.parse_args()
