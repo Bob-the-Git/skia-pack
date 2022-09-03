@@ -200,15 +200,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   windows:
-    runs-on: windows-2019
-    defaults:
-      run:
-        working-directory: C:\vcpkg
+    runs-on: windows-2022
     strategy:
       matrix:
         build_type: [Debug, Release]
       fail-fast: false
-    steps: 
+    steps:
       - run: git config --global core.autocrlf input
       - uses: actions/checkout@v2
       - shell: bash
