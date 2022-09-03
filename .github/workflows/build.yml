@@ -200,12 +200,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   windows:
-    runs-on: windows-2022
+    runs-on: windows-2019
+    defaults:
+      run:
+        working-directory: C:\skia-pack
     strategy:
       matrix:
         build_type: [Debug, Release]
       fail-fast: false
     steps:
+      - run: mkdir C:\skia-pack
+      - run: cd /d C:\skia-pack
       - run: git config --global core.autocrlf input
       - uses: actions/checkout@v2
       - shell: bash
