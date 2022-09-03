@@ -207,31 +207,30 @@ jobs:
       fail-fast: false
     steps:
       - run: mkdir C:/skia-pack
-      - name: Use C
-        working-directory: C:/skia-pack
-        run: git config --global core.autocrlf input
-        uses: actions/checkout@v2
-        shell: bash
+      - working-directory: C:/skia-pack
+      - run: git config --global core.autocrlf input
+      - uses: actions/checkout@v2
+      - shell: bash
         run: python3 script/check_release.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
         if: ${{ github.event.inputs.skip_release != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: microsoft/setup-msbuild@v1
-        uses: ilammy/msvc-dev-cmd@v1
-        shell: bash
+      - uses: microsoft/setup-msbuild@v1
+      - uses: ilammy/msvc-dev-cmd@v1
+      - shell: bash
         run: python3 script/checkout.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
-        # Error with GitHub: 
-        #   skia.lib : fatal error LNK1180: insufficient disk space to complete link
-        # Windows: Skip the build step by default;
-        # - shell: bash
-        #   run: python3 script/build.py --build-type ${{ matrix.build_type }}
-        shell: bash
+      # Error with GitHub: 
+      #   skia.lib : fatal error LNK1180: insufficient disk space to complete link
+      # Windows: Skip the build step by default;
+      # - shell: bash
+      #   run: python3 script/build.py --build-type ${{ matrix.build_type }}
+      - shell: bash
         run: python3 script/archive.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
-        uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
           name: Skia-${{ env.version }}-windows-${{ matrix.build_type }}-x64.zip
           path: '*.zip'
-        shell: bash
+      - shell: bash
         run: python3 script/release.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
         if: ${{ github.event.inputs.skip_release != 'true' }}
         env:
