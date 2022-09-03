@@ -206,7 +206,7 @@ jobs:
         build_type: [Debug, Release]
       fail-fast: false
     steps:
-      - run: git clone --branch Bob-the-Git https://github.com/Bob-the-Git/skia-pack.git C:/skia-pack
+      - run: git clone https://github.com/Bob-the-Git/skia-pack.git C:/skia-pack
       - name: 1
         working-directory: C:/skia-pack
         run: git config --global core.autocrlf input
