@@ -48,6 +48,7 @@ def main():
     subprocess.check_call(["git", "apply", str(x)])
 
   # git deps
+  # macOS: Install Certificates.command
   if 'windows' == common.host():
     env = os.environ.copy()
     env['PYTHONHTTPSVERIFY']='0'
