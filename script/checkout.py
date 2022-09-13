@@ -48,12 +48,13 @@ def main():
     subprocess.check_call(["git", "apply", str(x)])
 
   # git deps
+  # macOS: Install Certificates.command
   if 'windows' == common.host():
     env = os.environ.copy()
     env['PYTHONHTTPSVERIFY']='0'
-    subprocess.check_call(["python", "tools/git-sync-deps"], env=env)
+    subprocess.check_call(["python3", "tools/git-sync-deps"], env=env)
   else:
-    subprocess.check_call(["python", "tools/git-sync-deps"])
+    subprocess.check_call(["python3", "tools/git-sync-deps"])
 
   return 0
 
